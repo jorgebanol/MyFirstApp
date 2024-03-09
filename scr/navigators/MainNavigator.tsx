@@ -1,16 +1,24 @@
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {
+  NativeStackScreenProps,
+  createNativeStackNavigator,
+} from "@react-navigation/native-stack";
 import { Onboarding1 } from "../screens/Onboarding1";
 import { Onboarding2 } from "../screens/Onboarding2";
 import { Onboarding3 } from "../screens/Onboarding3";
+import { Home } from "../screens/Home";
 
 export type ObjectScreens = {
   Onboarding1: undefined;
   Onboarding2: undefined;
   Onboarding3: undefined;
+  Home: undefined;
 };
 
 const rootStack = createNativeStackNavigator<ObjectScreens>();
+
+export type RootStackScreenProps<T extends keyof ObjectScreens> =
+  NativeStackScreenProps<ObjectScreens, T>;
 
 export const MainNavigator = () => {
   return (
@@ -29,6 +37,11 @@ export const MainNavigator = () => {
         <rootStack.Screen
           name="Onboarding3"
           component={Onboarding3}
+          options={{ headerShown: false, animation: "fade" }}
+        />
+        <rootStack.Screen
+          name="Home"
+          component={Home}
           options={{ headerShown: false, animation: "fade" }}
         />
       </rootStack.Group>
